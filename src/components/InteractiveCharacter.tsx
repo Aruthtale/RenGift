@@ -243,8 +243,8 @@ export default function InteractiveCharacter({ externalTarget }: InteractiveChar
       </div>
 
       <p className="character-hint">
-        <span className="character-hint--desktop">Arahin stroberi di sekelilingku ✨</span>
-        <span className="character-hint--mobile">Click & Swap a stroberi lalu puterin ✨</span>
+        <span className="character-hint--desktop">Arahin stroberi nya ngelilingin character ✨</span>
+        <span className="character-hint--mobile">Click & Swap a stroberi terus puterin ✨</span>
       </p>
 
       {/* ── Debug overlay (visible only when DEBUG = true) ── */}

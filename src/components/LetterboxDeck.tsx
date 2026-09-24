@@ -74,8 +74,8 @@ export const LetterboxDeck: React.FC = () => {
             </div>
 
             <div className="envelope-sealed__front-text">
-              <p className="envelope-to">Untuk: Rhea tercinta 💌</p>
-              <p className="envelope-from">Dari seseorang yang mendoakanmu selalu</p>
+              <p className="envelope-to">For Renatha 💌</p>
+              <p className="envelope-from">From someone</p>
             </div>
           </div>
 
