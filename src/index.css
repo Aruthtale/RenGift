@@ -1,0 +1,21 @@
+/* Clean Reset & Global Base for Rhea's Birthday Gift */
+:root {
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --serif: 'Playfair Display', Georgia, serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #FFFDFD;
+  color: #4C0519;
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+}

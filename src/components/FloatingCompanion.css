@@ -1,0 +1,102 @@
+/* Floating Companion (Draggable Strawberry / Blossom) */
+
+.floating-companion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  z-index: 50;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@media (max-width: 768px) {
+  .floating-companion {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+.floating-companion--dragging {
+  cursor: grabbing;
+}
+
+.floating-companion__aura {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.35) 0%, transparent 70%);
+  animation: companion-pulse 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.floating-companion__body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.5px solid rgba(251, 113, 133, 0.35);
+  border-radius: 50%;
+  box-shadow: 0 8px 24px -4px rgba(225, 29, 72, 0.22),
+              0 2px 6px -1px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(8px);
+  transition: transform 140ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.floating-companion:hover .floating-companion__body {
+  transform: scale(1.08);
+}
+
+.floating-companion--dragging .floating-companion__body {
+  transform: scale(1.18);
+  box-shadow: 0 14px 32px -6px rgba(225, 29, 72, 0.35);
+}
+
+.floating-companion__svg {
+  width: 36px;
+  height: 36px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+}
+
+.floating-companion__tooltip {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: #ffffff;
+  color: #BE123C;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #FECDD3;
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.12);
+  pointer-events: none;
+  animation: tooltip-bounce 2s ease-in-out infinite;
+}
+
+@keyframes companion-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 0.9;
+  }
+}
+
+@keyframes tooltip-bounce {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -4px);
+  }
+}

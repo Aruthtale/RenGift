@@ -1,0 +1,441 @@
+/* Letterbox & Interactive Card Deck (Warm White + Blossom Pink) */
+
+.letterbox-wrapper {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* ====================================================
+   1. ENVELOPE (SURAT AWAL)
+   ==================================================== */
+.envelope-sealed {
+  width: 100%;
+  max-width: 380px;
+  height: 250px;
+  background: #FFFFFF;
+  border: 1.5px solid #FECDD3;
+  border-radius: 16px;
+  box-shadow: 0 16px 36px -10px rgba(244, 114, 182, 0.22),
+              0 4px 12px rgba(0, 0, 0, 0.03);
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 240ms ease;
+}
+
+.envelope-sealed:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 44px -8px rgba(225, 29, 72, 0.26);
+}
+
+.envelope-sealed:active {
+  transform: translateY(0) scale(0.99);
+}
+
+/* Flap segitiga surat */
+.envelope-sealed__flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 110px;
+  background: linear-gradient(180deg, #FFF5F7 0%, #FFE4E6 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  border-bottom: 1.5px solid #FECDD3;
+  z-index: 2;
+}
+
+.envelope-sealed__body {
+  position: relative;
+  z-index: 3;
+}
+
+.envelope-sealed__stamp {
+  position: absolute;
+  top: -90px;
+  right: 4px;
+  background: #FFFFFF;
+  border: 1.5px dashed #FB7185;
+  border-radius: 6px;
+  padding: 4px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(225, 29, 72, 0.1);
+  transform: rotate(4deg);
+}
+
+.envelope-sealed__stamp span {
+  font-size: 16px;
+}
+
+.envelope-sealed__stamp small {
+  font-size: 9px;
+  font-weight: 700;
+  color: #BE123C;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Segel stempel lilin / wax seal stroberi */
+.envelope-sealed__seal {
+  position: absolute;
+  top: -34px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 48px;
+  background: radial-gradient(circle, #FB7185 0%, #E11D48 100%);
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(225, 29, 72, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #FFFFFF;
+  z-index: 5;
+  animation: seal-pulse 2.5s ease-in-out infinite;
+}
+
+.seal-heart {
+  font-size: 20px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+}
+
+.envelope-sealed__front-text {
+  text-align: left;
+  border-top: 1px dashed #FECDD3;
+  padding-top: 14px;
+  margin-top: 20px;
+}
+
+.envelope-to {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #881337;
+  margin: 0 0 2px;
+}
+
+.envelope-from {
+  font-size: 12.5px;
+  color: #9F1239;
+  opacity: 0.85;
+  margin: 0;
+}
+
+.envelope-sealed__hint {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #E11D48;
+  opacity: 0.85;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+  animation: hint-float 2s ease-in-out infinite;
+}
+
+/* ====================================================
+   2. CARD DECK (TUMPUKAN KARTU INTERAKTIF)
+   ==================================================== */
+.card-deck-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deck-controls-top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 0 4px;
+}
+
+.deck-page-indicator {
+  font-size: 13px;
+  font-weight: 600;
+  color: #9F1239;
+  background: #FFF1F2;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid #FFE4E6;
+}
+
+.deck-close-btn {
+  background: none;
+  border: none;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #BE123C;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 150ms ease;
+}
+
+.deck-close-btn:hover {
+  background: #FFE4E6;
+}
+
+/* Stack Wrapper with 3D Perspective */
+.deck-stack {
+  position: relative;
+  width: 100%;
+  height: 430px;
+  perspective: 1200px;
+}
+
+/* Card Layers */
+.deck-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #FFFFFF;
+  border: 1.5px solid #FFE4E6;
+  border-radius: 20px;
+  padding: 24px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  user-select: none;
+  touch-action: pan-y;
+  overflow: hidden;
+  transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              opacity 320ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 320ms ease;
+}
+
+/* Layer 0: Kartu Paling Depan (Aktif) */
+.deck-card--depth-0 {
+  z-index: 10;
+  transform: translate3d(0, 0, 0) scale(1);
+  box-shadow: 0 16px 36px -8px rgba(244, 114, 182, 0.2),
+              0 2px 8px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+}
+
+/* Hover effect: Kartu sedikit terangkat sebelum di-slide ke belakang */
+.deck-card--depth-0:hover {
+  transform: translate3d(0, -6px, 10px) scale(1.015);
+  box-shadow: 0 22px 46px -10px rgba(225, 29, 72, 0.25);
+  border-color: #FECDD3;
+}
+
+/* Layer 1: Kartu Kedua di Belakang */
+.deck-card--depth-1 {
+  z-index: 5;
+  transform: translate3d(0, 14px, -30px) scale(0.95);
+  opacity: 0.88;
+  box-shadow: 0 8px 20px rgba(244, 114, 182, 0.12);
+  pointer-events: none;
+}
+
+/* Layer 2: Kartu Ketiga Paling Belakang */
+.deck-card--depth-2 {
+  z-index: 1;
+  transform: translate3d(0, 26px, -60px) scale(0.90);
+  opacity: 0.6;
+  box-shadow: 0 4px 12px rgba(244, 114, 182, 0.08);
+  pointer-events: none;
+}
+
+/* Animasi Slide ke Belakang (Smooth Card Throw / Push Behind) */
+.deck-card--swiping-out {
+  transform: translate3d(115%, -20px, 40px) rotate(14deg) scale(0.92) !important;
+  opacity: 0;
+  transition: transform 280ms cubic-bezier(0.32, 0, 0.67, 0),
+              opacity 280ms cubic-bezier(0.32, 0, 0.67, 0) !important;
+}
+
+/* Konten di dalam Kartu */
+.deck-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.deck-card__badge {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.deck-card__num {
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #FDA4AF;
+}
+
+.deck-card__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #881337;
+  margin: 0 0 2px;
+}
+
+.deck-card__subtitle {
+  font-size: 12.5px;
+  color: #9F1239;
+  opacity: 0.8;
+  margin: 0 0 10px;
+}
+
+.deck-card__divider {
+  height: 1px;
+  background: linear-gradient(90deg, #FECDD3 0%, rgba(254, 205, 211, 0.1) 100%);
+  margin-bottom: 12px;
+}
+
+.deck-card__content {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4C0519;
+  margin: 0 0 12px;
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: 180px;
+  padding-right: 4px;
+  touch-action: pan-y;
+}
+
+.deck-card__content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.deck-card__content::-webkit-scrollbar-track {
+  background: #FFF5F7;
+  border-radius: 4px;
+}
+
+.deck-card__content::-webkit-scrollbar-thumb {
+  background: #FB7185;
+  border-radius: 4px;
+}
+
+.deck-card__quote {
+  background: #FFF1F2;
+  border-left: 3px solid #FB7185;
+  padding: 10px 14px;
+  border-radius: 0 10px 10px 0;
+  margin-bottom: 12px;
+}
+
+.deck-card__quote p {
+  font-size: 13px;
+  font-style: italic;
+  font-weight: 500;
+  color: #9F1239;
+  margin: 0;
+}
+
+.deck-card__footer {
+  text-align: center;
+  padding-top: 6px;
+  border-top: 1px dashed #FFE4E6;
+}
+
+.deck-swipe-hint {
+  font-size: 11px;
+  color: #BE123C;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+/* Navigasi Tombol di Bawah Deck */
+.deck-nav-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+  width: 100%;
+}
+
+.deck-btn {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid #FECDD3;
+  background: #FFFFFF;
+  color: #9F1239;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+.deck-btn:hover {
+  background: #FFF5F7;
+  border-color: #FB7185;
+}
+
+.deck-btn--primary {
+  background: linear-gradient(135deg, #E11D48 0%, #FB7185 100%);
+  color: #FFFFFF;
+  border: none;
+  box-shadow: 0 4px 14px rgba(225, 29, 72, 0.25);
+}
+
+.deck-btn--primary:hover {
+  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Animations */
+@keyframes seal-pulse {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+    box-shadow: 0 4px 14px rgba(225, 29, 72, 0.45);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.08);
+    box-shadow: 0 6px 20px rgba(225, 29, 72, 0.6);
+  }
+}
+
+@keyframes hint-float {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -3px);
+  }
+}
+
+@media (max-width: 480px) {
+  .deck-stack {
+    height: 440px;
+  }
+  .deck-card {
+    padding: 18px 15px;
+  }
+  .deck-card__content {
+    font-size: 13.5px;
+    line-height: 1.55;
+    max-height: 190px;
+  }
+}
